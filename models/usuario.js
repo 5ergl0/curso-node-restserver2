@@ -54,13 +54,20 @@ const UsuarioSchema= Schema({
 /*Una función de flecha mantiene a lo que apunta el this */
 
 /*.methods: nos permite sobrescribir los metodos existentes de moongoose 
-o crear metodos personalizados, */
+o crear metodos personalizados,
+
+Cuando llamemos a esto metodo con este modelo funcionara así*/
 
 UsuarioSchema.methods.toJSON= function(){
-    //Seaparamos del objeto la version y el password, todo lo demás quedara en la variable usuario
-    const {__v,password,...usuario} =this.toObject()
+    //Separamos del objeto la version y el password, todo lo demás quedara en la variable usuario
+    const {__v,password,_id,...usuario} =this.toObject()
+    
+    usuario.uid=_id//Cambiamos nombre de la llave 
+    
     return usuario
 }
+
+
 
 //1er param: nombre del modelo y para la colección (moongose agregara una 's' al final)
 //2ndo param:esquema 

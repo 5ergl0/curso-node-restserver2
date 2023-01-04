@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config()//Solo la necesitaras exportar aqui 
 
 const Server = require('./models/server')
 

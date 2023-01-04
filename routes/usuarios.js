@@ -2,8 +2,19 @@
 const {Router}=require('express')
 const {body,param}=require('express-validator')
 
-
+/*
 const{validarCampos}=require('../middlewares/validar-campos')
+const {validarJWT}=require('../middlewares/validar-jwt')
+const {esAdminRole,tieneRole}=require('../middlewares/validar-roles')
+*/
+
+const{
+  validarCampos, 
+  validarJWT, 
+  esAdminRole, 
+  tieneRole
+}=require('../middlewares')
+
 const{esRoleValido,emailExiste,existeUsuarioPorId}=require('../helpers/db-validators')
 
 
@@ -40,7 +51,11 @@ validarInputsPut=[
   validarCampos
 ]
 
+//Los middlewares se ejecutan de manera secuencial 
 validarInputsDelete=[
+  validarJWT,
+  //esAdminRole, //A fuerzas debe ser Administrador
+  tieneRole('ADMIN_ROLE','VENTAS_ROLE','OTRO_ROLE'),//Enviar argumentos a un middleware 
   param('id','No es un ID válido').isMongoId(),
   param('id').custom(existeUsuarioPorId),
   validarCampos

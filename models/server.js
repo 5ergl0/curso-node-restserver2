@@ -8,7 +8,9 @@ class Server{
     constructor(){
         this.app=express()
         this.port=process.env.PORT
+
         this.usuariosPath='/api/usuarios'
+        this.authPath='/api/auth'
 
         //Conectar a base de datos
         this.conectarDB()
@@ -41,10 +43,13 @@ class Server{
 
     routes(){
 
+        this.app.use(this.authPath,require('../routes/auth'))
+
     //middleware al cual le pasamos la rutas 
-        //         Ruta pricipal(path)      rutas path,put,get,etc      
+        //         Ruta pricipal(path)      UbicaciónArchivo(rutas path,put,get,etc), Recuerda exportar el router   
  
        this.app.use(this.usuariosPath,require('../routes/usuarios'))
+    
     }
 
     listen(){

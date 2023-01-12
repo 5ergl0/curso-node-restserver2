@@ -1,7 +1,12 @@
-//const { db } = require('../models/rol')
+
+/*
+const  Categoria= require('../models/categoria')
 const Role=require('../models/rol')
 const Usuario=require('../models/usuario')//Si necesitas el modelo del usuario debes importar el modelo obvio
+*/
 
+
+const  {Categoria,Role,Usuario, Producto}  = require('../models')
 
 //Buscar nombre de rol que sea igual a alguno de la DB
 
@@ -37,10 +42,32 @@ const existeUsuarioPorId=async(id)=>{
     }
 }
 
+
+const existeCategoriaPorId=async(id)=>{
+
+    const existeCategoria=await Categoria.findById(id)
+    if (!existeCategoria){
+        throw new Error(`No existe niguna categoria con ese id: ${id}`)
+    }
+}
+
+
+const existeProductoPorId=async(id)=>{
+
+    const existeProducto=await Producto.findById(id)
+    if (!existeProducto){
+        throw new Error(`No existe nigun producto con ese id: ${id}`)
+    }
+}
+
+
+
 module.exports={
     esRoleValido,
     emailExiste,
-    existeUsuarioPorId
+    existeUsuarioPorId,
+    existeCategoriaPorId,
+    existeProductoPorId
 }
 
 

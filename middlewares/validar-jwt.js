@@ -21,6 +21,7 @@ const validarJWT=async (req=request,res=response,next)=>{
 
 
     try {
+        //El JWT contiene el id
         
         //                        token,    secretKey
         const {uid}= jwt.verify(token,process.env.SECRETORPRIVATEKEY)//Valida y lo desencripta

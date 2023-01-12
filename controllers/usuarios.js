@@ -79,6 +79,8 @@ const usuariosPut=async(req, res=response)=>{
     res.json(usuario)
   }
 
+  
+
 const usuariosPatch=(req, res=responsse)=>{
     res.json({
         msg:'patch API'
@@ -96,15 +98,12 @@ const usuariosDelete=async(req, res=response)=>{
     //const usuario=await Usuario.findByIdAndDelete(id)
 
     //Cambiar estado 
-    const usuario=await Usuario.findByIdAndUpdate(id,{estado:false})
+    const usuario=await Usuario.findByIdAndUpdate(id,{estado:false},{new:true})
 
     //Autenticar
     //const usuarioAutenticado=req.usuario
 
-
-    
     res.json(usuario)
-
 
   }
 
